@@ -3,13 +3,19 @@ import sys
 from github import Github
 
 # Path for new folder
-path = "/Users/damien/Projects/"
-username = "______"
-password = "______"
+path = "YOUR_PATH"
+username = "YOUR_USERNAME"
+password = "YOUR_PASSWORD"
 
 
 def readMe_contents(repo_name):
-    return str("--------------------------------------------\nInitial Commit for project {}\n" \
+    """
+    Contents of readMe.txt file
+    :param repo_name:
+    :return:
+    """
+    return str("--------------------------------------------\n" \
+               "Initial Commit for project {}\n" \
                "--------------------------------------------".format(repo_name))
 
 
