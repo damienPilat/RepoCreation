@@ -1,9 +1,10 @@
 import os
 import sys
 from github import Github
+import pygit2
 
 # Path for new folder
-path = "YOUR_PATH"
+path = "YOUR_LOCAL_PATH"
 username = "YOUR_USERNAME"
 password = "YOUR_PASSWORD"
 
@@ -22,18 +23,21 @@ def readMe_contents(repo_name):
 def createRepo():
     """
     Get folder name from terminal input,
-    Create folder in specified path,
     Retrieve Git user account,
-    Create repo in user account.
+    Create repo in user account,
+    Add readMe file,
+    Clone to local path
     """
+    # Get repo name from user input
     repo_name = str(sys.argv[1])
-    os.makedirs(path + repo_name)
-    file_path = os.path.join(path, repo_name, 'readMe.txt')
-    f = open(file_path, "x")
-    f.write(readMe_contents(repo_name))
+
+    # Connect to Github
     user = Github(username, password).get_user()
+    # Create repo and add readMe
     repo = user.create_repo(repo_name)
     repo.create_file("readMe.txt", "initial commit", readMe_contents(repo_name))
+    # Clone Repo
+    pygit2.clone_repository(repo.git_url, '../'+repo_name)
 
     # Print: Repo created
     print("Repo '{}' successfully created".format(repo_name))
