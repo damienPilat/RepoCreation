@@ -1,12 +1,15 @@
 import os
 import sys
-from github import Github
 import pygit2
+from github import Github
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Path for new folder
-path = "YOUR_LOCAL_PATH"
-username = "YOUR_USERNAME"
-password = "YOUR_PASSWORD"
+path = os.getenv("FILEPATH")
+username = os.getenv("USERNAME")
+password = os.getenv("PASSWORD")
 
 
 def readMe_contents(repo_name):
